@@ -17,3 +17,4 @@ function App() {
 
 export default App;
 // Test comment for pre-commit hook
+// Testing lint-staged with TypeScript files only
