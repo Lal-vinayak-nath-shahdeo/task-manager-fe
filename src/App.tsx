@@ -8,9 +8,12 @@ function App() {
     <>
       hello world {count}
       <button onClick={() => setCount(count + 1)}>Click me</button>
-      <button onClick={() => count > 0 && setCount(count - 1)}>Click to remove</button>
+      <button onClick={() => count > 0 && setCount(count - 1)}>
+        Click to remove
+      </button>
     </>
   );
 }
 
 export default App;
+// Test comment for pre-commit hook
