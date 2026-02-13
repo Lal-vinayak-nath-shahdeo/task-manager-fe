@@ -1,7 +1,7 @@
 # =========================
 # Stage 1: Build Vite app
 # =========================
-FROM node:20-alpine AS build
+FROM --platform=linux/amd64 node:20-slim AS build
 WORKDIR /app
 
 # Install dependencies
@@ -15,7 +15,7 @@ RUN npm run build
 # =========================
 # Stage 2: Serve with Nginx
 # =========================
-FROM nginx:alpine
+FROM --platform=linux/amd64 nginx:alpine
 
 # Remove default nginx static content
 RUN rm -rf /usr/share/nginx/html/*
