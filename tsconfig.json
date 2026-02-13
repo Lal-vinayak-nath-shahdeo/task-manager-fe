@@ -16,5 +16,11 @@
 			]
 		},
 		"ignoreDeprecations": "6.0"
-	}
+	},
+	"exclude": [
+		"node_modules",
+		"dist",
+		"**/*.test.ts",
+		"**/*.test.tsx"
+	]
 }

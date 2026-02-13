@@ -6,15 +6,16 @@ function App() {
 
   return (
     <>
-      hello world {count}
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-      <button onClick={() => count > 0 && setCount(count - 1)}>
-        Click to remove
+      <p>hello world {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button
+        onClick={() => count > 0 && setCount(count - 1)}
+        disabled={count <= 0}
+      >
+        Decrement
       </button>
     </>
   );
 }
 
 export default App;
-// Test comment for pre-commit hook
-// Testing lint-staged with TypeScript files only
