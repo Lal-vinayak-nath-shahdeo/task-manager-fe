@@ -1,9 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-
 # Fast checks on staged files
 npx lint-staged
 
-# Quick test run (no coverage) so commits fail if tests are red
-npm test
+# Run tests once (no watch) so commits fail if tests are red
+npm test -- --run
