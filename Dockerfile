@@ -1,27 +1,27 @@
+# =========================
+# Stage 1: Build Vite app
+# =========================
 FROM node:20-slim AS build
 WORKDIR /app
 
-# Copy package files first (better caching)
+# Install dependencies
 COPY package*.json ./
-RUN npm ci --legacy-peer-deps --omit=dev
+RUN npm ci --legacy-peer-deps --ignore-scripts
 
 # Copy source and build
 COPY . .
 RUN npm run build
 
-# Production stage
+# =========================
+# Stage 2: Serve with Nginx
+# =========================
 FROM nginx:alpine
 
-# Copy custom nginx config if needed
-# COPY nginx.conf /etc/nginx/nginx.conf
+# Remove default nginx static content
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copy built assets
+# Copy built assets from the build stage
 COPY --from=build /app/dist /usr/share/nginx/html
-
-# Create non-root user for security
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001 && \
-    chown -R nodejs:nodejs /usr/share/nginx/html
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
