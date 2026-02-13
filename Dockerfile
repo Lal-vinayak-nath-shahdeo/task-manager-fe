@@ -1,7 +1,7 @@
 # =========================
 # Stage 1: Build Vite app
 # =========================
-FROM node:lts-alpine AS build
+FROM node:20-alpine AS build
 WORKDIR /app
 
 # Install dependencies
