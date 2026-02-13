@@ -10,7 +10,11 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 export default tseslint.config(
   { ignores: ['dist', 'node_modules', 'build', 'coverage'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended, eslintConfigPrettier],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      eslintConfigPrettier,
+    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -36,7 +40,10 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
       'prettier/prettier': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -48,6 +55,21 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': 'warn',
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
+    },
+  },
+  // Enforce test file location
+  {
+    files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],
+    ignores: ['**/test/**', '**/__tests__/**', 'test/**'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: 'Program',
+          message:
+            '❌ Test files must be placed in test/ or __tests__/ directories',
+        },
+      ],
     },
   }
 );
