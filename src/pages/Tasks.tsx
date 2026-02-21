@@ -1,3 +1,4 @@
+import { TasksCounter } from '@/components/TasksCounter';
 import type { FC, ReactElement } from 'react';
 
 export const Tasks: FC = (): ReactElement => {
@@ -9,9 +10,9 @@ export const Tasks: FC = (): ReactElement => {
             Tasks as on: Saturday, 21 Feb 2026
           </h1>
           <div className="flex justify-around">
-            <p className="text-white">Counter 1</p>
-            <p className="text-white">Counter 2</p>
-            <p className="text-white">Counter 3</p>
+            <TasksCounter status="todo" count={12} />
+            <TasksCounter status="inProgress" count={10} />
+            <TasksCounter status="completed" count={15} />
           </div>
         </div>
       </section>

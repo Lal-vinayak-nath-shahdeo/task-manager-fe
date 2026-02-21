@@ -14,35 +14,4 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    css: true,
-    alias: {
-      '@': path.resolve(__dirname, './src'), // 👈 Add this
-    },
-    include: [
-      'src/test/**/*.{test,spec}.{js,jsx,ts,tsx}',
-      'test/**/*.{test,spec}.{js,jsx,ts,tsx}',
-      'src/**/__tests__/**/*.{test,spec}.{js,jsx,ts,tsx}',
-    ],
-    exclude: ['node_modules', 'dist', 'build', 'coverage', '.git'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'json', 'html', 'lcov'],
-      reportsDirectory: './coverage',
-      exclude: [
-        'node_modules/',
-        'src/test/',
-        '**/*.d.ts',
-        '**/*.config.*',
-        '**/mockData',
-        'dist/',
-        'coverage/',
-        '**/*.test.{ts,tsx}',
-        '**/*.spec.{ts,tsx}',
-      ],
-    },
-  },
 });
