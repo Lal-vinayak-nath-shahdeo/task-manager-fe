@@ -7,7 +7,6 @@ import {
 
 export const TasksCounter: FC<ITaskCounter> = (props): ReactElement => {
   const { status, count } = props;
-  console.log(getTaskColor(status));
   return (
     <div className="flex flex-col items-center justify-center">
       <div

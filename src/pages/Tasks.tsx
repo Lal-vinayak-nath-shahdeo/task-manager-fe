@@ -15,7 +15,27 @@ export const Tasks: FC = (): ReactElement => {
             <TasksCounter status="inProgress" count={10} />
             <TasksCounter status="completed" count={15} />
           </div>
-          <TasksCard />
+          <TasksCard
+            title="Task Title"
+            description="Task Description"
+            dueDate={'2025-01-01T12:00:00.000Z'}
+            priority="low"
+            status="todo"
+          />
+          <TasksCard
+            title="Task Title"
+            description="Task Description"
+            dueDate={'2025-01-01T12:00:00.000Z'}
+            priority="normal"
+            status="inProgress"
+          />
+          <TasksCard
+            title="Task Title"
+            description="Task Description"
+            dueDate={'2025-01-01T12:00:00.000Z'}
+            priority="high"
+            status="completed"
+          />
         </div>
       </section>
       <section className="flex basis-1/3 bg-pink-400">

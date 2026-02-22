@@ -12,10 +12,6 @@ function convertFirstCharacterCapital(text: string | undefined): string {
 
 const getTaskColor = (status: status | undefined): string => {
   // Check if the status exists in our map, otherwise return 'white'
-  console.log(
-    { status },
-    TaskStatus[status as unknown as keyof typeof TaskStatus]
-  );
   return TaskStatus[status as keyof typeof TaskStatus] ?? DefaultTaskStatus;
 };
 
