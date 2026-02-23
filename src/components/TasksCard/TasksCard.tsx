@@ -25,7 +25,7 @@ export const TasksCard: FC<ITask> = (props: ITask): ReactElement => {
     <Card className="w-full mb-8">
       <CardHeader className="flex flex-row justify-between">
         <CardTitle className="basis-2/3 leading-8">{title}</CardTitle>
-        <div className="flex">
+        <div className="flex ml-auto mr-0">
           <Badge className="mr-2" variant="outline">
             {formattedDate}
           </Badge>
