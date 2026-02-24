@@ -26,32 +26,49 @@ import { Calendar as CalendarIcon } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-/* Datepicker imports */
 import { format } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CreateTaskSchema } from '@/schema/CreateTask.schema';
 import { z } from 'zod';
+import { useCreateTask } from '@/hooks/CreateTask.hook';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
+import { useQueryClient } from '@tanstack/react-query';
 
 type CreateTaskFormValues = z.infer<typeof CreateTaskSchema>;
 export function CreateTaskForm() {
-  // 1. Define your form.
+  const { mutate, isSuccess } = useCreateTask();
+  const queryClient = useQueryClient();
+
   const form = useForm<CreateTaskFormValues>({
     resolver: zodResolver(CreateTaskSchema),
-    /*  To get rid of the state change error add default values */
     defaultValues: {
       title: '',
       dueDate: new Date(),
+      status: 'todo',
+      priority: 'normal',
+      description: '',
     },
   });
 
   /** Function to handle what will happen when the form is submitted */
-  function onSubmit(values: any) {
-    console.log(values);
-
-    const dueDate = JSON.stringify(values.dueDate);
-    console.log(dueDate);
+  function onSubmit(values: CreateTaskFormValues) {
+    const dueDate = values.dueDate.toISOString();
+    mutate({ ...values, dueDate });
+    queryClient.invalidateQueries({
+      queryKey: ['fetchTasks'],
+      refetchType: 'all',
+    });
   }
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success('New task Is Created');
+    }
+    form.reset({});
+  }, [isSuccess]);
+
   return (
     <div>
       <h2 className="text-xl mb-4">Create a new task</h2>
@@ -85,6 +102,7 @@ export function CreateTaskForm() {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      value={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>
@@ -115,6 +133,7 @@ export function CreateTaskForm() {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      value={field.value}
                     >
                       <FormControl>
                         <SelectTrigger>

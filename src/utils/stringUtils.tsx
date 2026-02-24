@@ -1,5 +1,6 @@
 import {
-  DefaultTaskStatus,
+  DefaultColor,
+  PriorityStatus,
   TaskStatus,
   type status,
 } from '@/types/task.interface';
@@ -12,7 +13,13 @@ function convertFirstCharacterCapital(text: string | undefined): string {
 
 const getTaskColor = (status: status | undefined): string => {
   // Check if the status exists in our map, otherwise return 'white'
-  return TaskStatus[status as keyof typeof TaskStatus] ?? DefaultTaskStatus;
+  return TaskStatus[status as keyof typeof TaskStatus] ?? DefaultColor;
 };
 
-export { convertFirstCharacterCapital, getTaskColor };
+const getPriorityColor = (priority: string | undefined) => {
+  return (
+    PriorityStatus[priority as keyof typeof PriorityStatus] ?? DefaultColor
+  );
+};
+
+export { convertFirstCharacterCapital, getTaskColor, getPriorityColor };
