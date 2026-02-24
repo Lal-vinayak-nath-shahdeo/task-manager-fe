@@ -19,6 +19,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
+import { cn } from '@/lib/utils';
 
 export const CreateTaskForm: FC = (): ReactElement => {
   const [date, setDate] = useState(new Date());
@@ -62,11 +64,13 @@ export const CreateTaskForm: FC = (): ReactElement => {
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                variant="outline"
-                data-empty={!date}
-                className="data-[empty=true]:text-muted-foreground w-70 justify-start text-left font-normal"
+                variant={'outline'}
+                className={cn(
+                  'w-full justify-start text-left font-normal',
+                  !date && 'text-muted-foreground'
+                )}
               >
-                <CalendarIcon />
+                <CalendarIcon className="mr-4" />
                 {date ? format(date, 'PPP') : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
@@ -74,11 +78,17 @@ export const CreateTaskForm: FC = (): ReactElement => {
               <Calendar
                 mode="single"
                 selected={date}
-                onSelect={setDate}
-                required
+                onSelect={(day) => day && setDate(day)}
+                autoFocus
               />
             </PopoverContent>
           </Popover>
+        </div>
+        <div className="py-2">
+          <Textarea placeholder="Task Description" />
+        </div>
+        <div className="py-2 flex justify-end">
+          <Button>Create Task</Button>
         </div>
       </form>
     </div>
