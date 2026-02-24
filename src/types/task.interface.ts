@@ -1,6 +1,7 @@
 export type status = 'todo' | 'inProgress' | 'completed';
 
 export interface ITask {
+  _id?: string;
   title: string;
   description: string;
   status: status;
@@ -14,6 +15,10 @@ export const TaskStatus = {
   completed: 'green',
 } as const;
 
-export const DefaultTaskStatus = 'white';
+export const PriorityStatus = {
+  high: 'red',
+  normal: 'blue',
+  low: 'green',
+} as const;
 
-export type TaskStatus = (typeof TaskStatus)[keyof typeof TaskStatus];
+export const DefaultColor = 'white';
