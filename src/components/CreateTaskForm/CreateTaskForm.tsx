@@ -57,7 +57,7 @@ export function CreateTaskForm() {
     const dueDate = values.dueDate.toISOString();
     mutate({ ...values, dueDate });
     queryClient.invalidateQueries({
-      queryKey: ['fetchTasks'],
+      queryKey: ['fetch-tasks'],
       refetchType: 'all',
     });
   }
