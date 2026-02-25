@@ -8,6 +8,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps --ignore-scripts
 
+# Receive VITE_ vars as build args so Vite bundles them at build time
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Copy source and build
 COPY . .
 RUN npm run build

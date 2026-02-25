@@ -1,11 +1,13 @@
 version: '3.8'
 
 services:
-  frontend:
+  task-manager-fe:
     build:
       context: .
-      dockerfile: Dockerfile
-    container_name: task-manager-fe
+      args:
+        VITE_API_URL: ${VITE_API_URL}
     ports:
-      - '3000:80' # Host port 3000 -> Container port 80
+      - '${APP_PORT}:3000'
+    environment:
+      - NODE_ENV=${NODE_ENV}
     restart: unless-stopped
