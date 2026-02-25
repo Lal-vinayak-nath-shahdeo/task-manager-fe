@@ -1,11 +1,11 @@
-version: '3.8'
-
+# docker-compose.yml
 services:
   task-manager-fe:
     build:
       context: .
       args:
         VITE_API_URL: ${VITE_API_URL}
+    container_name: task-manager-fe # 👈 add this back
     ports:
       - '${APP_PORT}:3000'
     environment:

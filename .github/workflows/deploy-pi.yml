@@ -15,11 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Debug secrets
-        run: |
-          echo "DEPLOY_PATH is set: ${{ secrets.DEPLOY_PATH != '' }}"
-          echo "APP_PORT is set: ${{ secrets.APP_PORT != '' }}"
-
       - name: Sync repo to deploy path
         run: |
           sudo mkdir -p "${{ secrets.DEPLOY_PATH }}"
