@@ -9,7 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: self-hosted
-    environment: production # ← make sure this matches EXACTLY with GitHub Environment name
+    environment: pi # 👈 changed from "production" to "pi"
 
     steps:
       - name: Checkout code
